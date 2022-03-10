@@ -66,8 +66,18 @@ a:active {
     background: linear-gradient(120deg, #ffc3d7, #ffe28a);
 }
 
-p {
-    padding-top: 7.5%;
+#navbar a {
+    display: block;
+  }
+
+.p1 {
+    padding-top: 150px;
+}
+
+@media screen and (max-width: 1000px) {
+    .p1 {
+        padding-top: 195px;
+    }
 }
 
 ::-webkit-scrollbar {
