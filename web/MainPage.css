@@ -70,6 +70,58 @@ p {
     padding-top: 7.5%;
 }
 
+.membership h3{
+    text-align: center;
+    padding: 10px;
+}
+
+.membership .main{
+    padding: 10px;
+}
+
+.membership img.mainPromote{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    height: 20%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.membership .subPromote {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.membership .subPromote img{
+    width: 100%;
+    height: 500px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+  
+.membership .sub::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.membership .sub {
+    width: 90%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.subPromote a:hover img{
+    opacity: 0.5;
+    transition: 1s;
+    display: inline-block;
+}
+
+
 ::-webkit-scrollbar {
     width: 13px;
 }
