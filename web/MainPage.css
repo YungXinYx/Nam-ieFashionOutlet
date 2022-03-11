@@ -81,8 +81,8 @@ a:active {
     padding: 10px;
 }
 
-.membership .main {
-    padding: 10px;
+.membership{
+    width: 100%;
 }
 
 .membership img.mainPromote {
@@ -94,37 +94,84 @@ a:active {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.membership .main{
+    padding: 10px;
+}
+
+.membership .sub {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
 .membership .subPromote {
     float: left;
-    width: 33.33%;
+    width: 25%;
     padding: 10px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.membership .subPromote img {
-    width: 100%;
-    height: 500px;
+.membership .card {
+	overflow: hidden;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 300px;
 }
 
-.membership .sub::after {
-    content: "";
-    clear: both;
-    display: table;
+.membership .card:hover .info,
+.membership .card:hover .info:before {
+  transform: translateY(87%) translateZ(0);
 }
 
-.membership .sub {
-    width: 90%;
+.membership .card a{
+    text-decoration: none;
+}
+
+.membership .description {
+    padding: 10px;
+	text-align: center;
+    color: black;
+}
+
+.membership .info {
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    position: relative;
+	width: 100%;
+    height: 300px;
+    background: linear-gradient(120deg, #ffc3d7, #ffe28a);
+    opacity: 0.7;
+	transform: translateY(100%) translateZ(0);
+	transition: transform 0.5s ease-out;
 }
 
-.subPromote a:hover img {
-    opacity: 0.5;
-    transition: 1s;
-    display: inline-block;
+@media screen and (max-width: 900px) {
+    .membership .subPromote {
+        float: left;
+        width: 50%;
+        display: flexbox;
+        padding: 10px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .membership .info {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 150px;
+        background: linear-gradient(120deg, #ffc3d7, #ffe28a);
+        opacity: 0.7;
+        transform: translateY(200%) translateZ(0);
+        transition: transform 0.5s ease-out;
+    }    
+
+    .membership .card:hover .info,
+    .membership .card:hover .info:before {
+        transform: translateY(170%) translateZ(0);
+    }
 }
 
 ::-webkit-scrollbar {
