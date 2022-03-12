@@ -137,14 +137,17 @@ a:active {
 
 .membership h3 {
     text-align: center;
-    padding: 10px;
+    padding-bottom: 10px;
     font-size: 50px;
     font-family: "Gill Sans", sans-serif;
     color: rgb(176, 99, 47);
+    text-shadow: 2px 2px #000000;
 }
 
 .membership {
     position: relative;
+    padding-top: 50px;
+    padding-bottom: 50px;
     width: 100%;
     height: fit-content;
     background: linear-gradient(120deg, #ff74a3, #f0b2c7);
@@ -168,6 +171,12 @@ a:active {
     margin-left: auto;
     margin-right: auto;
     display: block;
+}
+
+.sub::after {
+    content: "";
+    clear: both;
+    display: table;
 }
 
 .membership .subPromote {
