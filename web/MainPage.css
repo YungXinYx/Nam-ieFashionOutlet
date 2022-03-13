@@ -325,11 +325,9 @@ a:active {
 
 /* Category */
 
-.category h1 {}
-
 .feature-box {
-    width: 155px;
-    height: 160px;
+    width: 90px;
+    height: 90px;
     margin: 0px 20px;
     border-radius: 10px;
     overflow: hidden;
