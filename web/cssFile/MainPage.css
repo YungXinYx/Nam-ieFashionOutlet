@@ -103,7 +103,7 @@ a:active {
     background-position: center;
 }
 
-.f-slider-btn {
+.f-slider-btn-1 {
     font-size: 14.5pt;
     width: 200px;
     height: 50px;
@@ -117,16 +117,31 @@ a:active {
     margin-top: 210px;
 }
 
+.f-slider-btn-3 {
+    font-size: 14.5pt;
+    width: 200px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    background-color: #89CFF0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 325px;
+    margin-left: 925px;
+}
+
 .f-slide-1 {
     background-image: url(../Pictures/Slider_01.gif);
 }
 
 .f-slide-2 {
-    background-image: url(../images/Slider_02.jpg);
+    background-image: url(../Pictures/Slider_02.jpg);
 }
 
 .f-slide-3 {
-    background-image: url(../images/Slider_03.jpg);
+    background-image: url(../Pictures/Slider_03.gif);
 }
 
 .bodyContent {
