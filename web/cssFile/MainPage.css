@@ -103,62 +103,30 @@ a:active {
     background-position: center;
 }
 
-.f-slide-1 {
-    background-image: url(images/Slider_01.jpg);
-}
-
-.f-slide-2 {
-    background-image: url(images/Slider_02.jpg);
-}
-
-.f-slide-3 {
-    background-image: url(images/Slider_03.jpg);
-}
-
-.slider-text-container {
-    width: 80%;
-    height: 90%;
-    display: flex;
-    align-items: center;
-}
-
-.f-slider-text {
-    display: flex;
-    flex-direction: column;
-    margin-right: auto;
-}
-
-.f-slider-text strong {
-    color: #333333;
-    font-size: 3rem;
-    line-height: 55px;
-    margin-top: 10px;
-    letter-spacing: 1px;
-}
-
-.f-slider-text span {
-    text-transform: uppercase;
-    letter-spacing: 6px;
-    font-weight: 500;
-    color: #666666;
-    font-size: 1.2rem;
-}
-
 .f-slider-btn {
-    width: 170px;
-    height: 40px;
+    font-size: 14.5pt;
+    width: 200px;
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #ffffff;
-    background-color: #0b9d8a;
+    background-color: #FAC898;
     text-transform: uppercase;
     letter-spacing: 2px;
-    margin-top: 14px;
+    margin-top: 210px;
 }
 
-.f-slider-text strong font {
-    color: #0b9d8a;
+.f-slide-1 {
+    background-image: url(../Pictures/Slider_01.gif);
+}
+
+.f-slide-2 {
+    background-image: url(../images/Slider_02.jpg);
+}
+
+.f-slide-3 {
+    background-image: url(../images/Slider_03.jpg);
 }
 
 .bodyContent {
@@ -362,7 +330,7 @@ a:active {
 }
 
 
-/**** New Arrivals ****/
+/* New Arrivals */
 
 .newArrival {
     background-color: whitesmoke;
@@ -593,6 +561,3 @@ h2 {
     left: 0px;
     padding-top: 20px;
 }
-
-
-/* Category */
