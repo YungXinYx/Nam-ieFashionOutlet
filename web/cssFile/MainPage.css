@@ -128,7 +128,7 @@ a:active {
     background-color: #89CFF0;
     text-transform: uppercase;
     letter-spacing: 2px;
-    margin-top: 325px;
+    margin-top: 300px;
     margin-left: 925px;
 }
 
@@ -137,7 +137,7 @@ a:active {
 }
 
 .f-slide-2 {
-    background-image: url(../Pictures/Slider_02.jpg);
+    background-image: url(../Pictures/Slider_02.gif);
 }
 
 .f-slide-3 {
