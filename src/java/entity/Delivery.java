@@ -102,19 +102,6 @@ public class Delivery implements Serializable {
         this.receiverphonenumber = receiverphonenumber;
     }
 
-    public Delivery(String deliveryid, Date deliverydatetime, String deliverystatus, String receivername, String addressline1, String addressline2, int postcode, String country, String receiverphonenumber, Orders orderid) {
-        this.deliveryid = deliveryid;
-        this.deliverydatetime = deliverydatetime;
-        this.deliverystatus = deliverystatus;
-        this.receivername = receivername;
-        this.addressline1 = addressline1;
-        this.addressline2 = addressline2;
-        this.postcode = postcode;
-        this.country = country;
-        this.receiverphonenumber = receiverphonenumber;
-        this.orderid = orderid;
-    }
-
     public String getDeliveryid() {
         return deliveryid;
     }
@@ -219,5 +206,5 @@ public class Delivery implements Serializable {
     public String toString() {
         return "entity.Delivery[ deliveryid=" + deliveryid + " ]";
     }
-
+    
 }

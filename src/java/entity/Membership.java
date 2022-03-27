@@ -56,13 +56,6 @@ public class Membership implements Serializable {
         this.membershipid = membershipid;
     }
 
-    public Membership(String membershipid, Float discount, Integer points, List<Customer> customerList) {
-        this.membershipid = membershipid;
-        this.discount = discount;
-        this.points = points;
-        this.customerList = customerList;
-    }
-
     public String getMembershipid() {
         return membershipid;
     }
@@ -120,5 +113,5 @@ public class Membership implements Serializable {
     public String toString() {
         return "entity.Membership[ membershipid=" + membershipid + " ]";
     }
-
+    
 }

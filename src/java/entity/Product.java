@@ -72,15 +72,6 @@ public class Product implements Serializable {
         this.productname = productname;
     }
 
-    public Product(String productid, String productname, Float productprice, Category categoryid, List<ProductDetails> productDetailsList, List<Feedback> feedbackList) {
-        this.productid = productid;
-        this.productname = productname;
-        this.productprice = productprice;
-        this.categoryid = categoryid;
-        this.productDetailsList = productDetailsList;
-        this.feedbackList = feedbackList;
-    }
-
     public String getProductid() {
         return productid;
     }
@@ -155,5 +146,5 @@ public class Product implements Serializable {
     public String toString() {
         return "entity.Product[ productid=" + productid + " ]";
     }
-
+    
 }

@@ -72,14 +72,6 @@ public class ProductDetails implements Serializable {
         this.quantity = quantity;
     }
 
-    public ProductDetails(String productdetailsid, String productsize, int quantity, List<OrderDetails> orderDetailsList, Product productid) {
-        this.productdetailsid = productdetailsid;
-        this.productsize = productsize;
-        this.quantity = quantity;
-        this.orderDetailsList = orderDetailsList;
-        this.productid = productid;
-    }
-
     public String getProductdetailsid() {
         return productdetailsid;
     }
@@ -145,5 +137,5 @@ public class ProductDetails implements Serializable {
     public String toString() {
         return "entity.ProductDetails[ productdetailsid=" + productdetailsid + " ]";
     }
-
+    
 }

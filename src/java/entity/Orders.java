@@ -73,15 +73,6 @@ public class Orders implements Serializable {
         this.orderdatetime = orderdatetime;
     }
 
-    public Orders(String orderid, Date orderdatetime, List<Payment> paymentList, List<Delivery> deliveryList, List<OrderDetails> orderDetailsList, Customer customerid) {
-        this.orderid = orderid;
-        this.orderdatetime = orderdatetime;
-        this.paymentList = paymentList;
-        this.deliveryList = deliveryList;
-        this.orderDetailsList = orderDetailsList;
-        this.customerid = customerid;
-    }
-
     public String getOrderid() {
         return orderid;
     }
@@ -157,5 +148,5 @@ public class Orders implements Serializable {
     public String toString() {
         return "entity.Orders[ orderid=" + orderid + " ]";
     }
-
+    
 }

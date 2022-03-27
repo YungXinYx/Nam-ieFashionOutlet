@@ -68,13 +68,6 @@ public class StaffAccount implements Serializable {
         this.email = email;
     }
 
-    public StaffAccount(String username, String password, String email, Staff staffid) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.staffid = staffid;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -131,5 +124,5 @@ public class StaffAccount implements Serializable {
     public String toString() {
         return "entity.StaffAccount[ username=" + username + " ]";
     }
-
+    
 }

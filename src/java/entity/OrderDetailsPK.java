@@ -37,7 +37,7 @@ public class OrderDetailsPK implements Serializable {
         this.orderid = orderid;
         this.productdetailsid = productdetailsid;
     }
-  
+
     public String getOrderid() {
         return orderid;
     }
@@ -82,5 +82,5 @@ public class OrderDetailsPK implements Serializable {
     public String toString() {
         return "entity.OrderDetailsPK[ orderid=" + orderid + ", productdetailsid=" + productdetailsid + " ]";
     }
-
+    
 }

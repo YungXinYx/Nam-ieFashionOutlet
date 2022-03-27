@@ -85,19 +85,6 @@ public class Staff implements Serializable {
         this.country = country;
     }
 
-    public Staff(String staffid, String staffname, String staffic, String addressline1, String addressline2, Integer postcode, String country, Character gender, String managerinchargeid, StaffAccount staffAccount) {
-        this.staffid = staffid;
-        this.staffname = staffname;
-        this.staffic = staffic;
-        this.addressline1 = addressline1;
-        this.addressline2 = addressline2;
-        this.postcode = postcode;
-        this.country = country;
-        this.gender = gender;
-        this.managerinchargeid = managerinchargeid;
-        this.staffAccount = staffAccount;
-    }
-
     public String getStaffid() {
         return staffid;
     }
@@ -202,5 +189,5 @@ public class Staff implements Serializable {
     public String toString() {
         return "entity.Staff[ staffid=" + staffid + " ]";
     }
-
+    
 }

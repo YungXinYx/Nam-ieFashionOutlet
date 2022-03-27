@@ -66,14 +66,6 @@ public class Feedback implements Serializable {
         this.rating = rating;
     }
 
-    public Feedback(String feedbackcode, int rating, String comments, Customer customerid, Product productid) {
-        this.feedbackcode = feedbackcode;
-        this.rating = rating;
-        this.comments = comments;
-        this.customerid = customerid;
-        this.productid = productid;
-    }
-
     public String getFeedbackcode() {
         return feedbackcode;
     }
@@ -138,5 +130,5 @@ public class Feedback implements Serializable {
     public String toString() {
         return "entity.Feedback[ feedbackcode=" + feedbackcode + " ]";
     }
-
+    
 }

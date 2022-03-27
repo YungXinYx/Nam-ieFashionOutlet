@@ -68,13 +68,6 @@ public class CustomerAccount implements Serializable {
         this.email = email;
     }
 
-    public CustomerAccount(String username, String password, String email, Customer customerid) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.customerid = customerid;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -131,5 +124,5 @@ public class CustomerAccount implements Serializable {
     public String toString() {
         return "entity.CustomerAccount[ username=" + username + " ]";
     }
-
+    
 }

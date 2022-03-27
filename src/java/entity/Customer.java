@@ -109,21 +109,6 @@ public class Customer implements Serializable {
         this.gender = gender;
     }
 
-    public Customer(String customerid, String customername, String customeric, String address1, String address2, int postcode, String country, String gender, CustomerAccount customerAccount, List<Orders> ordersList, Membership membershipid, List<Feedback> feedbackList) {
-        this.customerid = customerid;
-        this.customername = customername;
-        this.customeric = customeric;
-        this.address1 = address1;
-        this.address2 = address2;
-        this.postcode = postcode;
-        this.country = country;
-        this.gender = gender;
-        this.customerAccount = customerAccount;
-        this.ordersList = ordersList;
-        this.membershipid = membershipid;
-        this.feedbackList = feedbackList;
-    }
-
     public String getCustomerid() {
         return customerid;
     }
@@ -246,5 +231,5 @@ public class Customer implements Serializable {
     public String toString() {
         return "entity.Customer[ customerid=" + customerid + " ]";
     }
-
+    
 }

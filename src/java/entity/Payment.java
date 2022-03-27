@@ -67,16 +67,6 @@ public class Payment implements Serializable {
         this.paymentid = paymentid;
     }
 
-    public Payment(String paymentid, Date paymentdatetime, Float paymentamount, String paymentstatus, Float deliveryfee, Orders orderid) {
-        this.paymentid = paymentid;
-        this.paymentdatetime = paymentdatetime;
-        this.paymentamount = paymentamount;
-        this.paymentstatus = paymentstatus;
-        this.deliveryfee = deliveryfee;
-        this.orderid = orderid;
-    }
-    
-
     public String getPaymentid() {
         return paymentid;
     }
