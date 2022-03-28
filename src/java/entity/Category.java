@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package model;
 
 import java.io.Serializable;
 import java.util.List;
@@ -108,7 +108,7 @@ public class Category implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Category[ categoryid=" + categoryid + " ]";
+        return "model.Category[ categoryid=" + categoryid + " ]";
     }
     
 }

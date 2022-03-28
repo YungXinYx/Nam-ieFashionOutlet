@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
-import entity.*;
-import java.io.*;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
@@ -17,14 +11,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.*;
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
+import javax.transaction.NotSupportedException;
+import javax.transaction.RollbackException;
+import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
+import model.Customer;
 
-/**
- *
- * @author melvi
- */
-public class AddUser extends HttpServlet {
+public class CustomerRegisterDetails extends HttpServlet {
 
     @PersistenceContext
     EntityManager em;
@@ -34,31 +29,27 @@ public class AddUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            String email = request.getParameter("email");
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            String passwordRepeat = request.getParameter("passwordRepeat");
-            CustomerAccount customerAccount = new CustomerAccount(email, username, password);
+        try {
+            HttpSession session = request.getSession();
 
-            if (!customerAccount.getPassword().equals(passwordRepeat)) {
-                
-            } else {
-                utx.begin();
-                boolean success = addOrder(customerAccount);
-                utx.commit();
-                HttpSession session = request.getSession();
-                session.setAttribute("sucess", success);
-                response.sendRedirect("CustomerDetails.jsp");
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, ex);
+            String customername = request.getParameter("customername");
+            String customeric = request.getParameter("customeric");
+            String address1 = request.getParameter("address1");
+            String address2 = request.getParameter("address2");
+            int postcode = Integer.parseInt(request.getParameter("postcode"));
+            String country = request.getParameter("country");
+
+            utx.begin();
+            int rowCount = (Integer) em.createNativeQuery("SELECT count(1) FROM CUSTOMER").getSingleResult();
+            Customer.setNextCustomerNumber(rowCount);
+            Customer customer = new Customer(Customer.getCUSTOMER_NUMBER_PREFIX() + String.format("%02d", Customer.getNextCustomerNumber()), customername, customeric, address1, address2, postcode, country);
+            Customer.increaseCustomerNumber();
+            utx.commit();
+            session.setAttribute("customer", customer);
+            request.getRequestDispatcher("CustomerRegisterPage.html").forward(request, response);
+        } catch (IllegalStateException | NumberFormatException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException ex) {
+            Logger.getLogger(CustomerRegisterDetails.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    public boolean addOrder(CustomerAccount customerAccount) {
-        em.persist(customerAccount);
-        return true;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

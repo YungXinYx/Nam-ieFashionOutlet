@@ -7,40 +7,50 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.Resource;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.transaction.UserTransaction;
+import model.Customer;
+import model.CustomerAccount;
 
-/**
- *
- * @author melvi
- */
-public class CheckOrder extends HttpServlet {
+public class CustomerRegisterPage extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    @PersistenceContext
+    EntityManager em;
+    @Resource
+    UserTransaction utx;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CheckOrder</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CheckOrder at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            HttpSession session = request.getSession();
+            Customer customer = (Customer) session.getAttribute("customer");
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String email = request.getParameter("email");
+            String confirmPassword = request.getParameter("confirmPassword");
+
+            utx.begin();
+            em.persist(customer);
+            CustomerAccount customerAccount = new CustomerAccount(username, password, email, customer);
+            em.persist(customerAccount);
+            utx.commit();
+            session.setAttribute("success", customerAccount);
+            response.sendRedirect("CustomerRegisterDetails.html");
+
+        } catch (Exception ex) {
+            Logger.getLogger(CustomerRegisterPage.class.getName()).log(Level.SEVERE, null, ex);
+
         }
     }
 

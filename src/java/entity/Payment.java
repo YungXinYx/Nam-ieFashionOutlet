@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package model;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -32,6 +32,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Payment.findAll", query = "SELECT p FROM Payment p")
     , @NamedQuery(name = "Payment.findByPaymentid", query = "SELECT p FROM Payment p WHERE p.paymentid = :paymentid")
+    , @NamedQuery(name = "Payment.findByCreditcardnumber", query = "SELECT p FROM Payment p WHERE p.creditcardnumber = :creditcardnumber")
+    , @NamedQuery(name = "Payment.findByCreditcardcvv", query = "SELECT p FROM Payment p WHERE p.creditcardcvv = :creditcardcvv")
+    , @NamedQuery(name = "Payment.findByCreditcardexpireddate", query = "SELECT p FROM Payment p WHERE p.creditcardexpireddate = :creditcardexpireddate")
     , @NamedQuery(name = "Payment.findByPaymentdatetime", query = "SELECT p FROM Payment p WHERE p.paymentdatetime = :paymentdatetime")
     , @NamedQuery(name = "Payment.findByPaymentamount", query = "SELECT p FROM Payment p WHERE p.paymentamount = :paymentamount")
     , @NamedQuery(name = "Payment.findByPaymentstatus", query = "SELECT p FROM Payment p WHERE p.paymentstatus = :paymentstatus")
@@ -45,6 +48,19 @@ public class Payment implements Serializable {
     @Size(min = 1, max = 15)
     @Column(name = "PAYMENTID")
     private String paymentid;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 16)
+    @Column(name = "CREDITCARDNUMBER")
+    private String creditcardnumber;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 3)
+    @Column(name = "CREDITCARDCVV")
+    private String creditcardcvv;
+    @Column(name = "CREDITCARDEXPIREDDATE")
+    @Temporal(TemporalType.DATE)
+    private Date creditcardexpireddate;
     @Column(name = "PAYMENTDATETIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date paymentdatetime;
@@ -67,12 +83,42 @@ public class Payment implements Serializable {
         this.paymentid = paymentid;
     }
 
+    public Payment(String paymentid, String creditcardnumber, String creditcardcvv) {
+        this.paymentid = paymentid;
+        this.creditcardnumber = creditcardnumber;
+        this.creditcardcvv = creditcardcvv;
+    }
+
     public String getPaymentid() {
         return paymentid;
     }
 
     public void setPaymentid(String paymentid) {
         this.paymentid = paymentid;
+    }
+
+    public String getCreditcardnumber() {
+        return creditcardnumber;
+    }
+
+    public void setCreditcardnumber(String creditcardnumber) {
+        this.creditcardnumber = creditcardnumber;
+    }
+
+    public String getCreditcardcvv() {
+        return creditcardcvv;
+    }
+
+    public void setCreditcardcvv(String creditcardcvv) {
+        this.creditcardcvv = creditcardcvv;
+    }
+
+    public Date getCreditcardexpireddate() {
+        return creditcardexpireddate;
+    }
+
+    public void setCreditcardexpireddate(Date creditcardexpireddate) {
+        this.creditcardexpireddate = creditcardexpireddate;
     }
 
     public Date getPaymentdatetime() {
@@ -137,7 +183,7 @@ public class Payment implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Payment[ paymentid=" + paymentid + " ]";
+        return "model.Payment[ paymentid=" + paymentid + " ]";
     }
     
 }

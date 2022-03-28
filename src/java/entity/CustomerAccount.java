@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package model;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -67,6 +67,13 @@ public class CustomerAccount implements Serializable {
         this.password = password;
         this.email = email;
     }
+    
+    public CustomerAccount(String username, String password, String email, Customer customerid) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.customerid = customerid;
+    }
 
     public String getUsername() {
         return username;
@@ -122,7 +129,7 @@ public class CustomerAccount implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.CustomerAccount[ username=" + username + " ]";
+        return "model.CustomerAccount[ username=" + username + " ]";
     }
     
 }

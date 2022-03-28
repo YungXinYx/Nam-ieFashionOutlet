@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nam'ie | Login</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <link href="cssFile/LoginPage.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+    <!--<div>
+        <img src="namie.png" alt="Nam'ie" usemap="#namieLogo" width="250" height="109" />
+        <map name="namieLogo">
+        <area shape="default" alt="Home" href="MainPage.html"/>
+    </map>
+    </div>-->
+    <div class="center">
+        <h1>Login</h1>
+        <form action="CustomerLoginPage" method="POST">
+            <div class="loginContainer">
+                <input type="text" name="username" id="username" required>
+                <label>Username</label>
+            </div>
+            <div class="loginContainer">
+                <input type="password" name="password" id="password" required>
+                <label>Password</label>
+            </div>
+            <div class="pass">Forgot Password?</div>
+            <input type="submit" value="Login">
+            <div class="signup_link">
+                <p>Don't have an account? <a href="CustomerRegisterPage.html">Sign Up</a></p>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package model;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,8 +12,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -39,9 +37,27 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Customer.findByAddress1", query = "SELECT c FROM Customer c WHERE c.address1 = :address1")
     , @NamedQuery(name = "Customer.findByAddress2", query = "SELECT c FROM Customer c WHERE c.address2 = :address2")
     , @NamedQuery(name = "Customer.findByPostcode", query = "SELECT c FROM Customer c WHERE c.postcode = :postcode")
-    , @NamedQuery(name = "Customer.findByCountry", query = "SELECT c FROM Customer c WHERE c.country = :country")
-    , @NamedQuery(name = "Customer.findByGender", query = "SELECT c FROM Customer c WHERE c.gender = :gender")})
+    , @NamedQuery(name = "Customer.findByCountry", query = "SELECT c FROM Customer c WHERE c.country = :country")})
 public class Customer implements Serializable {
+
+    private static final String CUSTOMER_NUMBER_PREFIX = "C";
+    private static int nextCustomerNumber = 1;
+
+    public static int getNextCustomerNumber() {
+        return nextCustomerNumber;
+    }
+
+    public static void setNextCustomerNumber(int nextCustomerNumber) {
+        Customer.nextCustomerNumber = nextCustomerNumber;
+    }
+
+    public static String getCUSTOMER_NUMBER_PREFIX() {
+        return CUSTOMER_NUMBER_PREFIX;
+    }
+    
+    public static void increaseCustomerNumber() {
+        nextCustomerNumber++;
+    }
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -77,18 +93,10 @@ public class Customer implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "COUNTRY")
     private String country;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 3)
-    @Column(name = "GENDER")
-    private String gender;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "customerid")
     private CustomerAccount customerAccount;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customerid")
     private List<Orders> ordersList;
-    @JoinColumn(name = "MEMBERSHIPID", referencedColumnName = "MEMBERSHIPID")
-    @ManyToOne
-    private Membership membershipid;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customerid")
     private List<Feedback> feedbackList;
 
@@ -99,14 +107,14 @@ public class Customer implements Serializable {
         this.customerid = customerid;
     }
 
-    public Customer(String customerid, String customername, String customeric, String address1, int postcode, String country, String gender) {
+    public Customer(String customerid, String customername, String customeric, String address1, String address2, int postcode, String country) {
         this.customerid = customerid;
         this.customername = customername;
         this.customeric = customeric;
         this.address1 = address1;
+        this.address2 = address2;
         this.postcode = postcode;
         this.country = country;
-        this.gender = gender;
     }
 
     public String getCustomerid() {
@@ -165,14 +173,6 @@ public class Customer implements Serializable {
         this.country = country;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
     public CustomerAccount getCustomerAccount() {
         return customerAccount;
     }
@@ -188,14 +188,6 @@ public class Customer implements Serializable {
 
     public void setOrdersList(List<Orders> ordersList) {
         this.ordersList = ordersList;
-    }
-
-    public Membership getMembershipid() {
-        return membershipid;
-    }
-
-    public void setMembershipid(Membership membershipid) {
-        this.membershipid = membershipid;
     }
 
     @XmlTransient
@@ -229,7 +221,7 @@ public class Customer implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Customer[ customerid=" + customerid + " ]";
+        return "model.Customer[ customerid=" + customerid + " ]";
     }
-    
+
 }

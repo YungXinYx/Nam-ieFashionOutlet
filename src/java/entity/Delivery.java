@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package model;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -204,7 +204,7 @@ public class Delivery implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Delivery[ deliveryid=" + deliveryid + " ]";
+        return "model.Delivery[ deliveryid=" + deliveryid + " ]";
     }
     
 }
