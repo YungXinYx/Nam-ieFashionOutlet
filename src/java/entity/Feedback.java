@@ -15,13 +15,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author melvi
+ * @author user
  */
 @Entity
 @Table(name = "FEEDBACK")
@@ -30,23 +28,22 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Feedback.findAll", query = "SELECT f FROM Feedback f")
     , @NamedQuery(name = "Feedback.findByFeedbackcode", query = "SELECT f FROM Feedback f WHERE f.feedbackcode = :feedbackcode")
     , @NamedQuery(name = "Feedback.findByRating", query = "SELECT f FROM Feedback f WHERE f.rating = :rating")
-    , @NamedQuery(name = "Feedback.findByComments", query = "SELECT f FROM Feedback f WHERE f.comments = :comments")})
+    , @NamedQuery(name = "Feedback.findByComments", query = "SELECT f FROM Feedback f WHERE f.comments = :comments")
+    , @NamedQuery(name = "Feedback.findByStaffreply", query = "SELECT f FROM Feedback f WHERE f.staffreply = :staffreply")})
 public class Feedback implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 15)
     @Column(name = "FEEDBACKCODE")
     private String feedbackcode;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "RATING")
     private int rating;
-    @Size(max = 5)
     @Column(name = "COMMENTS")
     private String comments;
+    @Column(name = "STAFFREPLY")
+    private String staffreply;
     @JoinColumn(name = "CUSTOMERID", referencedColumnName = "CUSTOMERID")
     @ManyToOne(optional = false)
     private Customer customerid;
@@ -64,14 +61,6 @@ public class Feedback implements Serializable {
     public Feedback(String feedbackcode, int rating) {
         this.feedbackcode = feedbackcode;
         this.rating = rating;
-    }
-
-    public Feedback(String feedbackcode, int rating, String comments, Customer customerid, Product productid) {
-        this.feedbackcode = feedbackcode;
-        this.rating = rating;
-        this.comments = comments;
-        this.customerid = customerid;
-        this.productid = productid;
     }
 
     public String getFeedbackcode() {
@@ -96,6 +85,14 @@ public class Feedback implements Serializable {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    public String getStaffreply() {
+        return staffreply;
+    }
+
+    public void setStaffreply(String staffreply) {
+        this.staffreply = staffreply;
     }
 
     public Customer getCustomerid() {
@@ -138,5 +135,5 @@ public class Feedback implements Serializable {
     public String toString() {
         return "entity.Feedback[ feedbackcode=" + feedbackcode + " ]";
     }
-
+    
 }

@@ -18,13 +18,11 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author melvi
+ * @author user
  */
 @Entity
 @Table(name = "DELIVERY")
@@ -45,41 +43,28 @@ public class Delivery implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 15)
     @Column(name = "DELIVERYID")
     private String deliveryid;
     @Column(name = "DELIVERYDATETIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date deliverydatetime;
-    @Size(max = 20)
     @Column(name = "DELIVERYSTATUS")
     private String deliverystatus;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
     @Column(name = "RECEIVERNAME")
     private String receivername;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
     @Column(name = "ADDRESSLINE1")
     private String addressline1;
-    @Size(max = 20)
     @Column(name = "ADDRESSLINE2")
     private String addressline2;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "POSTCODE")
     private int postcode;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
     @Column(name = "COUNTRY")
     private String country;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 11)
     @Column(name = "RECEIVERPHONENUMBER")
     private String receiverphonenumber;
     @JoinColumn(name = "ORDERID", referencedColumnName = "ORDERID")
@@ -100,19 +85,6 @@ public class Delivery implements Serializable {
         this.postcode = postcode;
         this.country = country;
         this.receiverphonenumber = receiverphonenumber;
-    }
-
-    public Delivery(String deliveryid, Date deliverydatetime, String deliverystatus, String receivername, String addressline1, String addressline2, int postcode, String country, String receiverphonenumber, Orders orderid) {
-        this.deliveryid = deliveryid;
-        this.deliverydatetime = deliverydatetime;
-        this.deliverystatus = deliverystatus;
-        this.receivername = receivername;
-        this.addressline1 = addressline1;
-        this.addressline2 = addressline2;
-        this.postcode = postcode;
-        this.country = country;
-        this.receiverphonenumber = receiverphonenumber;
-        this.orderid = orderid;
     }
 
     public String getDeliveryid() {
@@ -219,5 +191,5 @@ public class Delivery implements Serializable {
     public String toString() {
         return "entity.Delivery[ deliveryid=" + deliveryid + " ]";
     }
-
+    
 }

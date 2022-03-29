@@ -18,14 +18,12 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author melvi
+ * @author user
  */
 @Entity
 @Table(name = "PRODUCT_DETAILS")
@@ -40,17 +38,12 @@ public class ProductDetails implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 15)
     @Column(name = "PRODUCTDETAILSID")
     private String productdetailsid;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
     @Column(name = "PRODUCTSIZE")
     private String productsize;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "QUANTITY")
     private int quantity;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productDetails")
@@ -70,14 +63,6 @@ public class ProductDetails implements Serializable {
         this.productdetailsid = productdetailsid;
         this.productsize = productsize;
         this.quantity = quantity;
-    }
-
-    public ProductDetails(String productdetailsid, String productsize, int quantity, List<OrderDetails> orderDetailsList, Product productid) {
-        this.productdetailsid = productdetailsid;
-        this.productsize = productsize;
-        this.quantity = quantity;
-        this.orderDetailsList = orderDetailsList;
-        this.productid = productid;
     }
 
     public String getProductdetailsid() {
@@ -145,5 +130,5 @@ public class ProductDetails implements Serializable {
     public String toString() {
         return "entity.ProductDetails[ productdetailsid=" + productdetailsid + " ]";
     }
-
+    
 }

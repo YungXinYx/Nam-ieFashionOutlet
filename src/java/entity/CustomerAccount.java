@@ -15,13 +15,11 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author melvi
+ * @author user
  */
 @Entity
 @Table(name = "CUSTOMER_ACCOUNT")
@@ -36,19 +34,12 @@ public class CustomerAccount implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
     @Column(name = "USERNAME")
     private String username;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 8)
     @Column(name = "PASSWORD")
     private String password;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
     @Column(name = "EMAIL")
     private String email;
     @JoinColumn(name = "CUSTOMERID", referencedColumnName = "CUSTOMERID")
@@ -66,13 +57,6 @@ public class CustomerAccount implements Serializable {
         this.username = username;
         this.password = password;
         this.email = email;
-    }
-
-    public CustomerAccount(String username, String password, String email, Customer customerid) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.customerid = customerid;
     }
 
     public String getUsername() {
@@ -131,5 +115,5 @@ public class CustomerAccount implements Serializable {
     public String toString() {
         return "entity.CustomerAccount[ username=" + username + " ]";
     }
-
+    
 }

@@ -16,14 +16,12 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author melvi
+ * @author user
  */
 @Entity
 @Table(name = "CATEGORY")
@@ -37,13 +35,9 @@ public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 1)
     @Column(name = "CATEGORYID")
     private String categoryid;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
     @Column(name = "CATEGORYNAME")
     private String categoryname;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryid")
@@ -59,12 +53,6 @@ public class Category implements Serializable {
     public Category(String categoryid, String categoryname) {
         this.categoryid = categoryid;
         this.categoryname = categoryname;
-    }
-
-    public Category(String categoryid, String categoryname, List<Product> productList) {
-        this.categoryid = categoryid;
-        this.categoryname = categoryname;
-        this.productList = productList;
     }
 
     public String getCategoryid() {

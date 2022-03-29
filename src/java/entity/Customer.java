@@ -12,21 +12,17 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author melvi
+ * @author user
  */
 @Entity
 @Table(name = "CUSTOMER")
@@ -39,56 +35,35 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Customer.findByAddress1", query = "SELECT c FROM Customer c WHERE c.address1 = :address1")
     , @NamedQuery(name = "Customer.findByAddress2", query = "SELECT c FROM Customer c WHERE c.address2 = :address2")
     , @NamedQuery(name = "Customer.findByPostcode", query = "SELECT c FROM Customer c WHERE c.postcode = :postcode")
-    , @NamedQuery(name = "Customer.findByCountry", query = "SELECT c FROM Customer c WHERE c.country = :country")
-    , @NamedQuery(name = "Customer.findByGender", query = "SELECT c FROM Customer c WHERE c.gender = :gender")})
+    , @NamedQuery(name = "Customer.findByCountry", query = "SELECT c FROM Customer c WHERE c.country = :country")})
 public class Customer implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 15)
     @Column(name = "CUSTOMERID")
     private String customerid;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
     @Column(name = "CUSTOMERNAME")
     private String customername;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 15)
     @Column(name = "CUSTOMERIC")
     private String customeric;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
     @Column(name = "ADDRESS1")
     private String address1;
-    @Size(max = 20)
     @Column(name = "ADDRESS2")
     private String address2;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "POSTCODE")
     private int postcode;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
     @Column(name = "COUNTRY")
     private String country;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 3)
-    @Column(name = "GENDER")
-    private String gender;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "customerid")
     private CustomerAccount customerAccount;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customerid")
     private List<Orders> ordersList;
-    @JoinColumn(name = "MEMBERSHIPID", referencedColumnName = "MEMBERSHIPID")
-    @ManyToOne
-    private Membership membershipid;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customerid")
     private List<Feedback> feedbackList;
 
@@ -99,29 +74,13 @@ public class Customer implements Serializable {
         this.customerid = customerid;
     }
 
-    public Customer(String customerid, String customername, String customeric, String address1, int postcode, String country, String gender) {
+    public Customer(String customerid, String customername, String customeric, String address1, int postcode, String country) {
         this.customerid = customerid;
         this.customername = customername;
         this.customeric = customeric;
         this.address1 = address1;
         this.postcode = postcode;
         this.country = country;
-        this.gender = gender;
-    }
-
-    public Customer(String customerid, String customername, String customeric, String address1, String address2, int postcode, String country, String gender, CustomerAccount customerAccount, List<Orders> ordersList, Membership membershipid, List<Feedback> feedbackList) {
-        this.customerid = customerid;
-        this.customername = customername;
-        this.customeric = customeric;
-        this.address1 = address1;
-        this.address2 = address2;
-        this.postcode = postcode;
-        this.country = country;
-        this.gender = gender;
-        this.customerAccount = customerAccount;
-        this.ordersList = ordersList;
-        this.membershipid = membershipid;
-        this.feedbackList = feedbackList;
     }
 
     public String getCustomerid() {
@@ -180,14 +139,6 @@ public class Customer implements Serializable {
         this.country = country;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
     public CustomerAccount getCustomerAccount() {
         return customerAccount;
     }
@@ -203,14 +154,6 @@ public class Customer implements Serializable {
 
     public void setOrdersList(List<Orders> ordersList) {
         this.ordersList = ordersList;
-    }
-
-    public Membership getMembershipid() {
-        return membershipid;
-    }
-
-    public void setMembershipid(Membership membershipid) {
-        this.membershipid = membershipid;
     }
 
     @XmlTransient
@@ -246,5 +189,5 @@ public class Customer implements Serializable {
     public String toString() {
         return "entity.Customer[ customerid=" + customerid + " ]";
     }
-
+    
 }

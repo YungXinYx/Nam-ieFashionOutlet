@@ -7,21 +7,17 @@ package entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author melvi
+ * @author user
  */
 @Entity
 @Table(name = "STAFF")
@@ -34,44 +30,27 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Staff.findByAddressline1", query = "SELECT s FROM Staff s WHERE s.addressline1 = :addressline1")
     , @NamedQuery(name = "Staff.findByAddressline2", query = "SELECT s FROM Staff s WHERE s.addressline2 = :addressline2")
     , @NamedQuery(name = "Staff.findByPostcode", query = "SELECT s FROM Staff s WHERE s.postcode = :postcode")
-    , @NamedQuery(name = "Staff.findByCountry", query = "SELECT s FROM Staff s WHERE s.country = :country")
-    , @NamedQuery(name = "Staff.findByGender", query = "SELECT s FROM Staff s WHERE s.gender = :gender")
-    , @NamedQuery(name = "Staff.findByManagerinchargeid", query = "SELECT s FROM Staff s WHERE s.managerinchargeid = :managerinchargeid")})
+    , @NamedQuery(name = "Staff.findByCountry", query = "SELECT s FROM Staff s WHERE s.country = :country")})
 public class Staff implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 5)
     @Column(name = "STAFFID")
     private String staffid;
-    @Size(max = 50)
     @Column(name = "STAFFNAME")
     private String staffname;
-    @Size(max = 50)
     @Column(name = "STAFFIC")
     private String staffic;
-    @Size(max = 40)
     @Column(name = "ADDRESSLINE1")
     private String addressline1;
-    @Size(max = 40)
     @Column(name = "ADDRESSLINE2")
     private String addressline2;
     @Column(name = "POSTCODE")
     private Integer postcode;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
     @Column(name = "COUNTRY")
     private String country;
-    @Column(name = "GENDER")
-    private Character gender;
-    @Size(max = 5)
-    @Column(name = "MANAGERINCHARGEID")
-    private String managerinchargeid;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "staffid")
-    private StaffAccount staffAccount;
 
     public Staff() {
     }
@@ -83,19 +62,6 @@ public class Staff implements Serializable {
     public Staff(String staffid, String country) {
         this.staffid = staffid;
         this.country = country;
-    }
-
-    public Staff(String staffid, String staffname, String staffic, String addressline1, String addressline2, Integer postcode, String country, Character gender, String managerinchargeid, StaffAccount staffAccount) {
-        this.staffid = staffid;
-        this.staffname = staffname;
-        this.staffic = staffic;
-        this.addressline1 = addressline1;
-        this.addressline2 = addressline2;
-        this.postcode = postcode;
-        this.country = country;
-        this.gender = gender;
-        this.managerinchargeid = managerinchargeid;
-        this.staffAccount = staffAccount;
     }
 
     public String getStaffid() {
@@ -154,30 +120,6 @@ public class Staff implements Serializable {
         this.country = country;
     }
 
-    public Character getGender() {
-        return gender;
-    }
-
-    public void setGender(Character gender) {
-        this.gender = gender;
-    }
-
-    public String getManagerinchargeid() {
-        return managerinchargeid;
-    }
-
-    public void setManagerinchargeid(String managerinchargeid) {
-        this.managerinchargeid = managerinchargeid;
-    }
-
-    public StaffAccount getStaffAccount() {
-        return staffAccount;
-    }
-
-    public void setStaffAccount(StaffAccount staffAccount) {
-        this.staffAccount = staffAccount;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -202,5 +144,5 @@ public class Staff implements Serializable {
     public String toString() {
         return "entity.Staff[ staffid=" + staffid + " ]";
     }
-
+    
 }

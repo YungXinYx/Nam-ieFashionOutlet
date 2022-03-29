@@ -15,12 +15,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author melvi
+ * @author user
  */
 @Entity
 @Table(name = "ORDER_DETAILS")
@@ -36,7 +35,6 @@ public class OrderDetails implements Serializable {
     @EmbeddedId
     protected OrderDetailsPK orderDetailsPK;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "PRODUCTQUANTITY")
     private int productquantity;
     @JoinColumn(name = "ORDERID", referencedColumnName = "ORDERID", insertable = false, updatable = false)
@@ -60,13 +58,6 @@ public class OrderDetails implements Serializable {
 
     public OrderDetails(String orderid, String productdetailsid) {
         this.orderDetailsPK = new OrderDetailsPK(orderid, productdetailsid);
-    }
-
-    public OrderDetails(OrderDetailsPK orderDetailsPK, int productquantity, Orders orders, ProductDetails productDetails) {
-        this.orderDetailsPK = orderDetailsPK;
-        this.productquantity = productquantity;
-        this.orders = orders;
-        this.productDetails = productDetails;
     }
 
     public OrderDetailsPK getOrderDetailsPK() {
@@ -125,5 +116,5 @@ public class OrderDetails implements Serializable {
     public String toString() {
         return "entity.OrderDetails[ orderDetailsPK=" + orderDetailsPK + " ]";
     }
-
+    
 }

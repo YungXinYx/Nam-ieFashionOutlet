@@ -18,13 +18,11 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author melvi
+ * @author user
  */
 @Entity
 @Table(name = "PAYMENT")
@@ -32,6 +30,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Payment.findAll", query = "SELECT p FROM Payment p")
     , @NamedQuery(name = "Payment.findByPaymentid", query = "SELECT p FROM Payment p WHERE p.paymentid = :paymentid")
+    , @NamedQuery(name = "Payment.findByCreditcardnumber", query = "SELECT p FROM Payment p WHERE p.creditcardnumber = :creditcardnumber")
+    , @NamedQuery(name = "Payment.findByCreditcardcvv", query = "SELECT p FROM Payment p WHERE p.creditcardcvv = :creditcardcvv")
+    , @NamedQuery(name = "Payment.findByCreditcardexpireddate", query = "SELECT p FROM Payment p WHERE p.creditcardexpireddate = :creditcardexpireddate")
     , @NamedQuery(name = "Payment.findByPaymentdatetime", query = "SELECT p FROM Payment p WHERE p.paymentdatetime = :paymentdatetime")
     , @NamedQuery(name = "Payment.findByPaymentamount", query = "SELECT p FROM Payment p WHERE p.paymentamount = :paymentamount")
     , @NamedQuery(name = "Payment.findByPaymentstatus", query = "SELECT p FROM Payment p WHERE p.paymentstatus = :paymentstatus")
@@ -41,17 +42,23 @@ public class Payment implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 15)
     @Column(name = "PAYMENTID")
     private String paymentid;
+    @Basic(optional = false)
+    @Column(name = "CREDITCARDNUMBER")
+    private String creditcardnumber;
+    @Basic(optional = false)
+    @Column(name = "CREDITCARDCVV")
+    private String creditcardcvv;
+    @Column(name = "CREDITCARDEXPIREDDATE")
+    @Temporal(TemporalType.DATE)
+    private Date creditcardexpireddate;
     @Column(name = "PAYMENTDATETIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date paymentdatetime;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "PAYMENTAMOUNT")
     private Float paymentamount;
-    @Size(max = 20)
     @Column(name = "PAYMENTSTATUS")
     private String paymentstatus;
     @Column(name = "DELIVERYFEE")
@@ -67,15 +74,11 @@ public class Payment implements Serializable {
         this.paymentid = paymentid;
     }
 
-    public Payment(String paymentid, Date paymentdatetime, Float paymentamount, String paymentstatus, Float deliveryfee, Orders orderid) {
+    public Payment(String paymentid, String creditcardnumber, String creditcardcvv) {
         this.paymentid = paymentid;
-        this.paymentdatetime = paymentdatetime;
-        this.paymentamount = paymentamount;
-        this.paymentstatus = paymentstatus;
-        this.deliveryfee = deliveryfee;
-        this.orderid = orderid;
+        this.creditcardnumber = creditcardnumber;
+        this.creditcardcvv = creditcardcvv;
     }
-    
 
     public String getPaymentid() {
         return paymentid;
@@ -83,6 +86,30 @@ public class Payment implements Serializable {
 
     public void setPaymentid(String paymentid) {
         this.paymentid = paymentid;
+    }
+
+    public String getCreditcardnumber() {
+        return creditcardnumber;
+    }
+
+    public void setCreditcardnumber(String creditcardnumber) {
+        this.creditcardnumber = creditcardnumber;
+    }
+
+    public String getCreditcardcvv() {
+        return creditcardcvv;
+    }
+
+    public void setCreditcardcvv(String creditcardcvv) {
+        this.creditcardcvv = creditcardcvv;
+    }
+
+    public Date getCreditcardexpireddate() {
+        return creditcardexpireddate;
+    }
+
+    public void setCreditcardexpireddate(Date creditcardexpireddate) {
+        this.creditcardexpireddate = creditcardexpireddate;
     }
 
     public Date getPaymentdatetime() {
