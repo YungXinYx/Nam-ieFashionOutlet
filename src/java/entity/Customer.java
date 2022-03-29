@@ -37,7 +37,11 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Customer.findByAddress1", query = "SELECT c FROM Customer c WHERE c.address1 = :address1")
     , @NamedQuery(name = "Customer.findByAddress2", query = "SELECT c FROM Customer c WHERE c.address2 = :address2")
     , @NamedQuery(name = "Customer.findByPostcode", query = "SELECT c FROM Customer c WHERE c.postcode = :postcode")
-    , @NamedQuery(name = "Customer.findByCountry", query = "SELECT c FROM Customer c WHERE c.country = :country")})
+    , @NamedQuery(name = "Customer.findByCountry", query = "SELECT c FROM Customer c WHERE c.country = :country")
+//sorting part
+    , @NamedQuery(name = "Customer.sortID", query = "SELECT c FROM Customer c ORDER BY UPPER(c.customerid) ASC")
+    , @NamedQuery(name = "Customer.sortName", query = "SELECT c FROM Customer c ORDER BY UPPER(c.customername) ASC")
+    , @NamedQuery(name = "Customer.sortIC", query = "SELECT c FROM Customer c ORDER BY UPPER(c.customeric) ASC")})
 public class Customer implements Serializable {
 
     private static final String CUSTOMER_NUMBER_PREFIX = "C";
@@ -54,7 +58,7 @@ public class Customer implements Serializable {
     public static String getCUSTOMER_NUMBER_PREFIX() {
         return CUSTOMER_NUMBER_PREFIX;
     }
-    
+
     public static void increaseCustomerNumber() {
         nextCustomerNumber++;
     }

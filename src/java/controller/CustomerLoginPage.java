@@ -2,12 +2,11 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,8 +18,7 @@ public class CustomerLoginPage extends HttpServlet {
 
     @PersistenceContext
     EntityManager em;
-    @Resource
-    Query query;
+    boolean accountFound = false;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -28,24 +26,38 @@ public class CustomerLoginPage extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             HttpSession session = request.getSession();
-            String userName = request.getParameter("username");
-            String passWord = request.getParameter("password");
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
 
-            String loginQuery = "SELECT * FROM CUSTOMER_ACCOUNT WHERE ca.username = :userName AND ca.password = :passWord";
-            query = em.createQuery(loginQuery);
-            query.setParameter("userName", userName);
-            query.setParameter("passWord", passWord);
+            List<CustomerAccount> accountList = getAllAccounts();
+            CustomerAccount customerAccount = new CustomerAccount();
+            
+            for (int i = 0; i < accountList.size(); i++) {
+                if (accountList.get(i).getUsername().equalsIgnoreCase(username) && accountList.get(i).getPassword().equalsIgnoreCase(password)) {
+                    customerAccount.setCustomerid(accountList.get(i).getCustomerid());
+                    customerAccount.setUsername(username);
+                    customerAccount.setPassword(password);
+                    customerAccount.setEmail(accountList.get(i).getEmail());
+                    accountFound = true;
+                }
+            }
 
-            if (query.getResultList().isEmpty()) {
-                response.sendRedirect("CustomerRegisterDetails.html");
+            if (!accountFound) {
+                response.sendRedirect("CustomerErrorLogin.jsp");
             } else {
-                CustomerAccount customerAccount = (CustomerAccount) query.getSingleResult();
                 session.setAttribute("customerAccount", customerAccount);
                 request.getRequestDispatcher("index.html").forward(request, response);
+                accountFound = false;
             }
+            
         } catch (Exception ex) {
             Logger.getLogger(CustomerLoginPage.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public List<CustomerAccount> getAllAccounts() {
+        List accountList = em.createNamedQuery("CustomerAccount.findAll").getResultList();
+        return accountList;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

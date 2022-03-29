@@ -42,8 +42,8 @@ public class CustomerRegisterDetails extends HttpServlet {
             utx.begin();
             int rowCount = (Integer) em.createNativeQuery("SELECT count(1) FROM CUSTOMER").getSingleResult();
             Customer.setNextCustomerNumber(rowCount);
-            Customer customer = new Customer(Customer.getCUSTOMER_NUMBER_PREFIX() + String.format("%02d", Customer.getNextCustomerNumber()), customername, customeric, address1, address2, postcode, country);
             Customer.increaseCustomerNumber();
+            Customer customer = new Customer(Customer.getCUSTOMER_NUMBER_PREFIX() + String.format("%02d", Customer.getNextCustomerNumber()), customername, customeric, address1, address2, postcode, country);
             utx.commit();
             session.setAttribute("customer", customer);
             request.getRequestDispatcher("CustomerRegisterPage.html").forward(request, response);

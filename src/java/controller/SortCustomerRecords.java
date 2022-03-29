@@ -5,59 +5,53 @@
  */
 package controller;
 
+import services.*;
+import model.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.transaction.UserTransaction;
-import model.Customer;
-import model.CustomerAccount;
 
-public class CustomerRegisterPage extends HttpServlet {
-
+@WebServlet(name = "ViewCustomerRecords", urlPatterns = {"/ViewCustomerRecords"})
+public class SortCustomerRecords extends HttpServlet {
+    
     @PersistenceContext
     EntityManager em;
-    @Resource
-    UserTransaction utx;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+        try {
+            CustomerService customerService = new CustomerService(em);
+            List<Customer> customerList = customerService.findAll(); 
+            
+            if(request.getParameter("buttonSort") != null){
+                String button = request.getParameter("buttonSort");
+                if (button.equals("Reset")) 
+                    customerList = customerService.findAll();
+                else if (button.equals("Sort by ID")) 
+                    customerList = customerService.sortID();
+                else if (button.equals("Sort by Name")) 
+                    customerList = customerService.sortName();
+                else if (button.equals("Sort by IC")) 
+                    customerList = customerService.sortIC();
+            }
+            
             HttpSession session = request.getSession();
-            Customer customer = (Customer) session.getAttribute("customer");
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            String email = request.getParameter("email");
-            String confirmPassword = request.getParameter("confirmPassword");
-
-            utx.begin();
-//            em.persist(customer);
-            CustomerAccount customerAccount = new CustomerAccount(username, password, email, customer);
-//            em.persist(customerAccount);
-            boolean success = addUser(customer, customerAccount);
-            utx.commit();
-            session.setAttribute("success", success);
-            response.sendRedirect("CustomerRegisterConfirmation.jsp");
-
-        } catch (Exception ex) {
-            Logger.getLogger(CustomerRegisterPage.class.getName()).log(Level.SEVERE, null, ex);
+            session.setAttribute("customerList", customerList);
+            response.sendRedirect("ViewCustomerRecords.jsp");
+        } catch (IOException ex) {
+            
         }
-    }
-
-    public boolean addUser(Customer customer, CustomerAccount customerAccount) {
-        em.persist(customer);
-        em.persist(customerAccount);
-        return true;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
