@@ -1,0 +1,31 @@
+#navbar {
+    position: fixed;
+    top: 0px;
+    display: block;
+    width: 100%;
+    transition: top 0.3s;
+    background: linear-gradient(120deg, #ffc3d7, #ffe28a);
+    z-index: 99;
+}
+
+#navbar a {
+    display: block;
+}
+
+.menu-row {
+    position: relative;
+}
+
+.menu-block {
+    display: flex;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+.menu-block img {
+    margin-left: 20px;
+    margin-right: 20px;
+}
