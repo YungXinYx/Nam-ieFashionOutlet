@@ -69,6 +69,8 @@ public class Product implements Serializable {
     private Category categoryid;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productid")
     private List<ProductDetails> productDetailsList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productid")
+    private List<Feedback> feedbackList;
 
     public Product() {
     }
@@ -146,6 +148,15 @@ public class Product implements Serializable {
 
     public void setProductDetailsList(List<ProductDetails> productDetailsList) {
         this.productDetailsList = productDetailsList;
+    }
+
+    @XmlTransient
+    public List<Feedback> getFeedbackList() {
+        return feedbackList;
+    }
+
+    public void setFeedbackList(List<Feedback> feedbackList) {
+        this.feedbackList = feedbackList;
     }
 
     @Override

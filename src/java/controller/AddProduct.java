@@ -74,8 +74,7 @@ public class AddProduct extends HttpServlet {
 
             for (int i = 0; i < productSize.length; i++) {
                 if(quantity[i] != 0) {
-                    productDetails[i] = new ProductDetails(productDetailsID[i], productSize[i], quantity[i], product);
-                    
+                    productDetails[i] = new ProductDetails(productDetailsID[i], productSize[i], quantity[i], product); 
                 }
             }
             boolean success = false;
