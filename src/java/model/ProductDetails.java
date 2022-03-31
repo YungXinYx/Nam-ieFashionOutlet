@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package model;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,16 +14,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author melvi
+ * @author ASUS
  */
 @Entity
 @Table(name = "PRODUCT_DETAILS")
@@ -53,8 +49,6 @@ public class ProductDetails implements Serializable {
     @NotNull
     @Column(name = "QUANTITY")
     private int quantity;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productDetails")
-    private List<OrderDetails> orderDetailsList;
     @JoinColumn(name = "PRODUCTID", referencedColumnName = "PRODUCTID")
     @ManyToOne(optional = false)
     private Product productid;
@@ -72,14 +66,13 @@ public class ProductDetails implements Serializable {
         this.quantity = quantity;
     }
 
-    public ProductDetails(String productdetailsid, String productsize, int quantity, List<OrderDetails> orderDetailsList, Product productid) {
+    public ProductDetails(String productdetailsid, String productsize, int quantity, Product productid) {
         this.productdetailsid = productdetailsid;
         this.productsize = productsize;
         this.quantity = quantity;
-        this.orderDetailsList = orderDetailsList;
         this.productid = productid;
     }
-
+    
     public String getProductdetailsid() {
         return productdetailsid;
     }
@@ -102,15 +95,6 @@ public class ProductDetails implements Serializable {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    @XmlTransient
-    public List<OrderDetails> getOrderDetailsList() {
-        return orderDetailsList;
-    }
-
-    public void setOrderDetailsList(List<OrderDetails> orderDetailsList) {
-        this.orderDetailsList = orderDetailsList;
     }
 
     public Product getProductid() {
@@ -143,7 +127,7 @@ public class ProductDetails implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.ProductDetails[ productdetailsid=" + productdetailsid + " ]";
+        return "model.ProductDetails[ productdetailsid=" + productdetailsid + " ]";
     }
-
+    
 }
