@@ -79,7 +79,6 @@ public class ProductDetails implements Serializable {
         this.productid = productid;
     }
 
-    
     public String getProductdetailsid() {
         return productdetailsid;
     }

@@ -35,7 +35,6 @@ public class AddProduct extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-
             String productName = request.getParameter("productname");
             float productPrice = Float.parseFloat(request.getParameter("productprice"));
             String categoryName = request.getParameter("category");
@@ -46,6 +45,7 @@ public class AddProduct extends HttpServlet {
             Part part1 = request.getPart("productimage1");
             Part part2 = request.getPart("productimage2");
             Part part3 = request.getPart("productimage3");
+            
             if (part1 != null) {
                 try {
                     createConnection();
@@ -57,11 +57,11 @@ public class AddProduct extends HttpServlet {
                     stmt.setString(2, productName);
                     stmt.setDouble(3, productPrice);
                     stmt.setBlob(4, productImage1);
-                    stmt.setBlob(5, productImage1);
-                    stmt.setBlob(6, productImage1);
+                    stmt.setBlob(5, productImage2);
+                    stmt.setBlob(6, productImage3);
                     stmt.setString(7, String.valueOf(category.getCategoryid()));
                     stmt.executeUpdate();
-                    
+
                 } catch (Exception e) {
                     out.println(e);
                 }
@@ -73,9 +73,7 @@ public class AddProduct extends HttpServlet {
             String[] productDetailsID = createProductDetailsID(productID, productSize);
 
             for (int i = 0; i < productSize.length; i++) {
-                if(quantity[i] != 0) {
-                    productDetails[i] = new ProductDetails(productDetailsID[i], productSize[i], quantity[i], product); 
-                }
+                productDetails[i] = new ProductDetails(productDetailsID[i], productSize[i], quantity[i], product);
             }
             boolean success = false;
             ProductDetailsService productDetailsService = new ProductDetailsService(em);
@@ -95,7 +93,6 @@ public class AddProduct extends HttpServlet {
     private void createConnection() {
         try {
             conn = DriverManager.getConnection(host, user, password);
-
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
