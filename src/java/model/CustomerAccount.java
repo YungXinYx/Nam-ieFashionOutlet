@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package model;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -24,14 +24,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author melvi
  */
 @Entity
-@Table(name = "STAFF_ACCOUNT")
+@Table(name = "CUSTOMER_ACCOUNT")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "StaffAccount.findAll", query = "SELECT s FROM StaffAccount s")
-    , @NamedQuery(name = "StaffAccount.findByUsername", query = "SELECT s FROM StaffAccount s WHERE s.username = :username")
-    , @NamedQuery(name = "StaffAccount.findByPassword", query = "SELECT s FROM StaffAccount s WHERE s.password = :password")
-    , @NamedQuery(name = "StaffAccount.findByEmail", query = "SELECT s FROM StaffAccount s WHERE s.email = :email")})
-public class StaffAccount implements Serializable {
+    @NamedQuery(name = "CustomerAccount.findAll", query = "SELECT c FROM CustomerAccount c")
+    , @NamedQuery(name = "CustomerAccount.findByUsername", query = "SELECT c FROM CustomerAccount c WHERE c.username = :username")
+    , @NamedQuery(name = "CustomerAccount.findByPassword", query = "SELECT c FROM CustomerAccount c WHERE c.password = :password")
+    , @NamedQuery(name = "CustomerAccount.findByEmail", query = "SELECT c FROM CustomerAccount c WHERE c.email = :email")})
+public class CustomerAccount implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -51,28 +51,28 @@ public class StaffAccount implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "EMAIL")
     private String email;
-    @JoinColumn(name = "STAFFID", referencedColumnName = "STAFFID")
+    @JoinColumn(name = "CUSTOMERID", referencedColumnName = "CUSTOMERID")
     @OneToOne(optional = false)
-    private Staff staffid;
+    private Customer customerid;
 
-    public StaffAccount() {
+    public CustomerAccount() {
     }
 
-    public StaffAccount(String username) {
+    public CustomerAccount(String username) {
         this.username = username;
     }
 
-    public StaffAccount(String username, String password, String email) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-    }
-
-    public StaffAccount(String username, String password, String email, Staff staffid) {
+    public CustomerAccount(String username, String password, String email) {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.staffid = staffid;
+    }
+    
+    public CustomerAccount(String username, String password, String email, Customer customerid) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.customerid = customerid;
     }
 
     public String getUsername() {
@@ -99,12 +99,12 @@ public class StaffAccount implements Serializable {
         this.email = email;
     }
 
-    public Staff getStaffid() {
-        return staffid;
+    public Customer getCustomerid() {
+        return customerid;
     }
 
-    public void setStaffid(Staff staffid) {
-        this.staffid = staffid;
+    public void setCustomerid(Customer customerid) {
+        this.customerid = customerid;
     }
 
     @Override
@@ -117,10 +117,10 @@ public class StaffAccount implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof StaffAccount)) {
+        if (!(object instanceof CustomerAccount)) {
             return false;
         }
-        StaffAccount other = (StaffAccount) object;
+        CustomerAccount other = (CustomerAccount) object;
         if ((this.username == null && other.username != null) || (this.username != null && !this.username.equals(other.username))) {
             return false;
         }
@@ -129,7 +129,7 @@ public class StaffAccount implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.StaffAccount[ username=" + username + " ]";
+        return "model.CustomerAccount[ username=" + username + " ]";
     }
-
+    
 }

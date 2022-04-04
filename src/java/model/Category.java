@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package model;
 
 import java.io.Serializable;
 import java.util.List;
@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author melvi
+ * @author ASUS
  */
 @Entity
 @Table(name = "CATEGORY")
@@ -59,12 +59,6 @@ public class Category implements Serializable {
     public Category(String categoryid, String categoryname) {
         this.categoryid = categoryid;
         this.categoryname = categoryname;
-    }
-
-    public Category(String categoryid, String categoryname, List<Product> productList) {
-        this.categoryid = categoryid;
-        this.categoryname = categoryname;
-        this.productList = productList;
     }
 
     public String getCategoryid() {

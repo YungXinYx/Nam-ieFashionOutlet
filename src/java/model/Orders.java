@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package model;
 
+import model.Customer;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -28,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author melvi
+ * @author kuxinyau
  */
 @Entity
 @Table(name = "ORDERS")
@@ -51,15 +52,15 @@ public class Orders implements Serializable {
     @Column(name = "ORDERDATETIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date orderdatetime;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderid")
-    private List<Payment> paymentList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderid")
-    private List<Delivery> deliveryList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orders")
     private List<OrderDetails> orderDetailsList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderid")
+    private List<Payment> paymentList;
     @JoinColumn(name = "CUSTOMERID", referencedColumnName = "CUSTOMERID")
     @ManyToOne(optional = false)
     private Customer customerid;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderid")
+    private List<Delivery> deliveryList;
 
     public Orders() {
     }
@@ -71,15 +72,6 @@ public class Orders implements Serializable {
     public Orders(String orderid, Date orderdatetime) {
         this.orderid = orderid;
         this.orderdatetime = orderdatetime;
-    }
-
-    public Orders(String orderid, Date orderdatetime, List<Payment> paymentList, List<Delivery> deliveryList, List<OrderDetails> orderDetailsList, Customer customerid) {
-        this.orderid = orderid;
-        this.orderdatetime = orderdatetime;
-        this.paymentList = paymentList;
-        this.deliveryList = deliveryList;
-        this.orderDetailsList = orderDetailsList;
-        this.customerid = customerid;
     }
 
     public String getOrderid() {
@@ -99,12 +91,29 @@ public class Orders implements Serializable {
     }
 
     @XmlTransient
+    public List<OrderDetails> getOrderDetailsList() {
+        return orderDetailsList;
+    }
+
+    public void setOrderDetailsList(List<OrderDetails> orderDetailsList) {
+        this.orderDetailsList = orderDetailsList;
+    }
+
+    @XmlTransient
     public List<Payment> getPaymentList() {
         return paymentList;
     }
 
     public void setPaymentList(List<Payment> paymentList) {
         this.paymentList = paymentList;
+    }
+
+    public Customer getCustomerid() {
+        return customerid;
+    }
+
+    public void setCustomerid(Customer customerid) {
+        this.customerid = customerid;
     }
 
     @XmlTransient
@@ -114,23 +123,6 @@ public class Orders implements Serializable {
 
     public void setDeliveryList(List<Delivery> deliveryList) {
         this.deliveryList = deliveryList;
-    }
-
-    @XmlTransient
-    public List<OrderDetails> getOrderDetailsList() {
-        return orderDetailsList;
-    }
-
-    public void setOrderDetailsList(List<OrderDetails> orderDetailsList) {
-        this.orderDetailsList = orderDetailsList;
-    }
-
-    public Customer getCustomerid() {
-        return customerid;
-    }
-
-    public void setCustomerid(Customer customerid) {
-        this.customerid = customerid;
     }
 
     @Override
@@ -157,5 +149,5 @@ public class Orders implements Serializable {
     public String toString() {
         return "entity.Orders[ orderid=" + orderid + " ]";
     }
-
+    
 }

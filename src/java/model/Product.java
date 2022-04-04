@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package model;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,6 +13,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -25,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author melvi
+ * @author ASUS
  */
 @Entity
 @Table(name = "PRODUCT")
@@ -46,19 +47,22 @@ public class Product implements Serializable {
     private String productid;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 30)
+    @Size(min = 1, max = 100)
     @Column(name = "PRODUCTNAME")
     private String productname;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "PRODUCTPRICE")
     private Float productprice;
+    @Basic(optional = false)
+    @NotNull
+    @Lob
+    @Column(name = "PRODUCTIMAGE1")
+    private byte[] productimage1;
     @JoinColumn(name = "CATEGORYID", referencedColumnName = "CATEGORYID")
     @ManyToOne(optional = false)
     private Category categoryid;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productid")
     private List<ProductDetails> productDetailsList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productid")
-    private List<Feedback> feedbackList;
 
     public Product() {
     }
@@ -67,18 +71,17 @@ public class Product implements Serializable {
         this.productid = productid;
     }
 
-    public Product(String productid, String productname) {
+    public Product(String productid, String productname, byte[] productimage1) {
         this.productid = productid;
         this.productname = productname;
+        this.productimage1 = productimage1;
     }
 
-    public Product(String productid, String productname, Float productprice, Category categoryid, List<ProductDetails> productDetailsList, List<Feedback> feedbackList) {
+    public Product(String productid, String productname, Float productprice, Category categoryid) {
         this.productid = productid;
         this.productname = productname;
         this.productprice = productprice;
         this.categoryid = categoryid;
-        this.productDetailsList = productDetailsList;
-        this.feedbackList = feedbackList;
     }
 
     public String getProductid() {
@@ -105,6 +108,14 @@ public class Product implements Serializable {
         this.productprice = productprice;
     }
 
+    public Serializable getProductimage1() {
+        return productimage1;
+    }
+
+    public void setProductimage1(byte[] productimage1) {
+        this.productimage1 = productimage1;
+    }
+
     public Category getCategoryid() {
         return categoryid;
     }
@@ -120,15 +131,6 @@ public class Product implements Serializable {
 
     public void setProductDetailsList(List<ProductDetails> productDetailsList) {
         this.productDetailsList = productDetailsList;
-    }
-
-    @XmlTransient
-    public List<Feedback> getFeedbackList() {
-        return feedbackList;
-    }
-
-    public void setFeedbackList(List<Feedback> feedbackList) {
-        this.feedbackList = feedbackList;
     }
 
     @Override
@@ -155,5 +157,5 @@ public class Product implements Serializable {
     public String toString() {
         return "entity.Product[ productid=" + productid + " ]";
     }
-
+    
 }

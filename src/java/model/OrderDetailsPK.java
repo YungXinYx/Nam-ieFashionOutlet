@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package model;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author melvi
+ * @author kuxinyau
  */
 @Embeddable
 public class OrderDetailsPK implements Serializable {
@@ -37,7 +37,7 @@ public class OrderDetailsPK implements Serializable {
         this.orderid = orderid;
         this.productdetailsid = productdetailsid;
     }
-  
+
     public String getOrderid() {
         return orderid;
     }
@@ -82,5 +82,5 @@ public class OrderDetailsPK implements Serializable {
     public String toString() {
         return "entity.OrderDetailsPK[ orderid=" + orderid + ", productdetailsid=" + productdetailsid + " ]";
     }
-
+    
 }

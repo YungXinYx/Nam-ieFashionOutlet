@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package model;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -24,13 +24,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author melvi
+ * @author kuxinyau
  */
 @Entity
 @Table(name = "DELIVERY")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Delivery.findAll", query = "SELECT d FROM Delivery d")
+    , @NamedQuery(name = "Delivery.findAllOrderByidDesc", query = "SELECT d FROM Delivery d ORDER BY d.deliveryid DESC")
     , @NamedQuery(name = "Delivery.findByDeliveryid", query = "SELECT d FROM Delivery d WHERE d.deliveryid = :deliveryid")
     , @NamedQuery(name = "Delivery.findByDeliverydatetime", query = "SELECT d FROM Delivery d WHERE d.deliverydatetime = :deliverydatetime")
     , @NamedQuery(name = "Delivery.findByDeliverystatus", query = "SELECT d FROM Delivery d WHERE d.deliverystatus = :deliverystatus")
@@ -100,19 +101,6 @@ public class Delivery implements Serializable {
         this.postcode = postcode;
         this.country = country;
         this.receiverphonenumber = receiverphonenumber;
-    }
-
-    public Delivery(String deliveryid, Date deliverydatetime, String deliverystatus, String receivername, String addressline1, String addressline2, int postcode, String country, String receiverphonenumber, Orders orderid) {
-        this.deliveryid = deliveryid;
-        this.deliverydatetime = deliverydatetime;
-        this.deliverystatus = deliverystatus;
-        this.receivername = receivername;
-        this.addressline1 = addressline1;
-        this.addressline2 = addressline2;
-        this.postcode = postcode;
-        this.country = country;
-        this.receiverphonenumber = receiverphonenumber;
-        this.orderid = orderid;
     }
 
     public String getDeliveryid() {
@@ -219,5 +207,5 @@ public class Delivery implements Serializable {
     public String toString() {
         return "entity.Delivery[ deliveryid=" + deliveryid + " ]";
     }
-
+    
 }
